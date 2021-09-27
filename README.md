@@ -1,37 +1,28 @@
-## Welcome to GitHub Pages
+# GPU passthrough on optimus-laptop
 
-You can use the [editor on GitHub](https://github.com/polynux/optimus-passthrough/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+I create this guide as a reminder for me, and to help people to successfully do a VM with full GPU passthrough on NVIDIA powered laptop with optimus-system.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+I'm using Arch so this guide is possible thanks to [the guide of the ArchLinux Wiki](https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF).
 
-### Markdown
+For this guide, i'm using a MSI Leopard GP73 8RE. I have an Intel i7-8750h, 16go DDR4 and a GTX 1060 6GB mobile.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Pre-requisites
 
-```markdown
-Syntax highlighted code block
+- You need a laptop with NVIDIA GPU and using optimus system. This are laptops using processor integrated iGPU and more powerfull NVIDIA dGPU.
 
-# Header 1
-## Header 2
-### Header 3
+- I'm using Manjaro (based on arch) but normally, it works on any linux system, you juste have to thinker a little bit to adapt.
 
-- Bulleted
-- List
+- An external monitor could be useful to check if GPU works as intended.
 
-1. Numbered
-2. List
+- Latest NVIDIA driver installed.
 
-**Bold** and _Italic_ and `Code` text
+## 1. Install
 
-[Link](url) and ![Image](src)
-```
+I will using optimus-manager as it's easier to switch between iGPU and dGPU.
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+1. Update your system: `sudo pacman -Syu`.
 
-### Jekyll Themes
+2. Install optimus-manager: `sudo pacman -S optimus-manager`. If you're using gnome or kde for example, you can install optimus-manager-qt, as it provides a graphical interface for switching between GPUs. To install, enter `pamac install optimus-manager-qt`. (You need AUR enabled, so you can use yay if you want)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/polynux/optimus-passthrough/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+3. Next, install all the dependencies we're using.
+   `sudo pacman -S virt-manager libvirt qemu edk2-ovmf`
